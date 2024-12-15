@@ -20,9 +20,7 @@ const Profile = () => {
             Authorization: `Bearer ${token}`,
           }
         })
-        // if (!response.ok) {
-        //   throw new Error("Failed to fetch user data.");
-        // }
+       
        let data = await response.json()
        console.log(data)
        setUserData(data)
