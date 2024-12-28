@@ -2,7 +2,7 @@ import React from "react";
 
 const TopBar = () => {
   return (
-    <div className="bg-[#428690] text-white text-sm  lg:px-16">
+    <div className="bg-[#ff7361] text-white text-sm  lg:px-16">
       <div className="container-fluid mx-auto flex flex-col items-center sm:flex-row sm:justify-between py-2 px-4 space-y-2 sm:space-y-0">
        
         <div className="flex items-center space-x-4">

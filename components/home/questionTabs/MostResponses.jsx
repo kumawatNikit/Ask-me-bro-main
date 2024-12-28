@@ -133,7 +133,7 @@ const MostResponses = () => {
             onClick={() => paginate(i + 1)}
             style={{
               margin: "0 5px",
-              backgroundColor: currentPage === i + 1 ? "#1c3a40" : "#FFF",
+              backgroundColor: currentPage === i + 1 ? "#ff7361" : "#FFF",
               color: currentPage === i + 1 ? "#FFF" : "#000",
               border: "1px solid #CCC",
               padding: "5px",

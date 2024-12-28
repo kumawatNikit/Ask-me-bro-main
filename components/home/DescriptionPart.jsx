@@ -15,27 +15,27 @@ const DescriptionPart = () => {
   return (
     <div>
       {/* Tabs Section */}
-      <div className="flex flex-wrap border-b border-[#1c3a40] text-black">
+      <div className="flex flex-wrap border-b border-[#ff7361] text-black">
         <button
-          className={`px-4 py-2 w-full sm:w-auto ${activeTab === 'recentQuestions' ? 'bg-[#1c3a40] text-white' : ''}`}
+          className={`px-4 py-2 w-full sm:w-auto ${activeTab === 'recentQuestions' ? 'bg-[#ff7361] text-white' : ''}`}
           onClick={() => handleTabClick('recentQuestions')}
         >
           Recent Questions
         </button>
         <button
-          className={`px-4 py-2 w-full sm:w-auto ${activeTab === 'mostResponses' ? 'bg-[#1c3a40] text-white' : ''}`}
+          className={`px-4 py-2 w-full sm:w-auto ${activeTab === 'mostResponses' ? 'bg-[#ff7361] text-white' : ''}`}
           onClick={() => handleTabClick('mostResponses')}
         >
           Most Responses
         </button>
         <button
-          className={`px-4 py-2 w-full sm:w-auto ${activeTab === 'recentlyAnswered' ? 'bg-[#1c3a40] text-white' : ''}`}
+          className={`px-4 py-2 w-full sm:w-auto ${activeTab === 'recentlyAnswered' ? 'bg-[#ff7361] text-white' : ''}`}
           onClick={() => handleTabClick('recentlyAnswered')}
         >
           Recently Answered
         </button>
         <button
-          className={`px-4 py-2 w-full sm:w-auto ${activeTab === 'noAnswers' ? 'bg-[#1c3a40] text-white' : ''}`}
+          className={`px-4 py-2 w-full sm:w-auto ${activeTab === 'noAnswers' ? 'bg-[#ff7361] text-white' : ''}`}
           onClick={() => handleTabClick('noAnswers')}
         >
           No Answers

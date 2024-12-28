@@ -1,43 +1,22 @@
-"use client"
+"use client";
+import useUserData from '@/lib/useUserData';
 import { CheckLg } from '@styled-icons/bootstrap';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
-  const [userData, setUserData] = useState(null)
-  const [error, setError] = useState(null)
+  const { isAuthenticated, token } = useSelector((state) => state.auth);
+  const apiUrl = `/auth/me`; 
+  const { userData, error } = useUserData(isAuthenticated, token, apiUrl); 
 
-   useEffect(()=>{
-    const fetchUserData = async ()=>{
-      const token = localStorage.getItem("token")
-      if(!token){
-        setError("Please log in")
-      }
-      try {
-        const response = await fetch("https://thoughtsexchange-prod.up.railway.app/api/auth/me", {
-          method: "GET",
-          headers:{
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          }
-        })
-       
-       let data = await response.json()
-       console.log(data)
-       setUserData(data)
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        setError(error.message || "An error occurred.");
-      }
-    }
-    fetchUserData();
-  },[])
-  if (error) {
-    return <div className="text-center text-red-500">{error}</div>;
-  }
+  // if (error) {
+  //   return <div className="text-center text-red-500">{error}</div>;
+  // }
 
-  if (!userData) {
-    return <div className="text-center text-gray-500">Loading...</div>;
-  }
+  // if (!userData) {
+  //   return <div className="text-center text-gray-500">Loading...</div>;
+  // }
+
   return (
     <div className="max-w-5xl mx-auto p-4">
       {/* About Admin */}

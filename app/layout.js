@@ -26,5 +26,5 @@ export default function RootLayout({ children }) {
      <Wrepar> {children}  </Wrepar>
       </body>
     </html>
-  );
+  )
 }

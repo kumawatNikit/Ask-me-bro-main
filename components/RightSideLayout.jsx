@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRss } from "@fortawesome/free-solid-svg-icons";
-import Login from "@/app/auth/login/page";
+// import Login from "@/app/auth/login/page";
 
 const RightSideLayout = () => {
   return (
     <div className="space-y-4">
       {/* Stats Section */}
       <div className="bg-white shadow-md rounded-lg p-4">
-        <h3 className="text-lg font-bold mb-2 border-b pb-2 text-[#428690]">
+        <h3 className="text-lg font-bold mb-2 border-b pb-2 text-[#ff7361]">
           Stats
         </h3>
         <ul className="space-y-2">
@@ -25,7 +25,7 @@ const RightSideLayout = () => {
 
       {/* Find Us Section */}
       <div className="bg-white shadow-md rounded-lg p-4">
-        <h3 className="text-lg font-bold mb-2 border-b pb-2 text-[#428690]">
+        <h3 className="text-lg font-bold mb-2 border-b pb-2 text-[#ff7361]">
           Find Us
         </h3>
         <div className="space-y-2">
@@ -60,11 +60,11 @@ const RightSideLayout = () => {
       </div>
 
       {/* Login Section */}
-      <Login   />
+      {/* <Login   /> */}
 
       {/* Highest Points Section */}
       <div className="bg-white shadow-md rounded-lg p-4">
-        <h3 className="text-lg font-bold mb-2 border-b pb-2 text-[#428690]">
+        <h3 className="text-lg font-bold mb-2 border-b pb-2 text-[#ff7361]">
           Highest Points
         </h3>
         <ul className="space-y-2">
@@ -100,23 +100,23 @@ const RightSideLayout = () => {
 
       {/* Tags Section */}
       <div className="bg-white shadow-md rounded-lg p-4">
-        <h3 className="text-lg font-bold mb-2 border-b pb-2 text-[#428690]">
+        <h3 className="text-lg font-bold mb-2 border-b pb-2 text-[#ff7361]">
           Tags
         </h3>
         <div className="flex flex-wrap gap-2">
-          <span className="bg-[#1c3a40] text-white px-3 py-1 text-sm rounded hover:bg-[#428690]">
+          <span className="bg-[#2f3239] text-white px-3 py-1 text-sm rounded hover:bg-[#ff7361]">
             PHP
           </span>
-          <span className="bg-[#1c3a40] text-white px-3 py-1 text-sm rounded hover:bg-[#428690]">
+          <span className="bg-[#2f3239] text-white px-3 py-1 text-sm rounded hover:bg-[#ff7361]">
             WordPress
           </span>
-          <span className="bg-[#1c3a40] text-white px-3 py-1 text-sm rounded hover:bg-[#428690]">
+          <span className="bg-[#2f3239] text-white px-3 py-1 text-sm rounded hover:bg-[#ff7361]">
             HTML
           </span>
-          <span className="bg-[#1c3a40] text-white px-3 py-1 text-sm rounded hover:bg-[#428690]">
+          <span className="bg-[#2f3239] text-white px-3 py-1 text-sm rounded hover:bg-[#ff7361]">
             CSS
           </span>
-          <span className="bg-[#1c3a40] text-white px-3 py-1 text-sm rounded hover:bg-[#428690]">
+          <span className="bg-[#2f3239] text-white px-3 py-1 text-sm rounded hover:bg-[#ff7361]">
             React
           </span>
         </div>
@@ -124,18 +124,18 @@ const RightSideLayout = () => {
 
       {/* Recent Questions Section */}
       <div className="bg-white shadow-md rounded-lg p-4">
-        <h3 className="text-lg font-bold mb-2 border-b pb-2 text-[#428690]">
+        <h3 className="text-lg font-bold mb-2 border-b pb-2 text-[#ff7361]">
           Recent Questions
         </h3>
         <div className="space-y-4">
           <div>
-            <p className="font-bold mb-1 hover:text-[#428690]">
+            <p className="font-bold mb-1 hover:text-[#ff7361]">
               This is my first Question
             </p>
             <p className="text-gray-500 text-sm">Feb 22, 2014</p>
           </div>
           <div>
-            <p className="font-bold mb-1 hover:text-[#428690]">
+            <p className="font-bold mb-1 hover:text-[#ff7361]">
               This Is My Second Poll Question
             </p>
             <p className="text-gray-500 text-sm">Feb 22, 2014</p>

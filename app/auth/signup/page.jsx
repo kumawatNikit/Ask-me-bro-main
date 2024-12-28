@@ -1,79 +1,86 @@
 "use client";
 import { useState } from "react";
 import { useFormik } from "formik";
-import { validationSchema } from "@/schema/schema";  
+import { validationSchema } from "@/schema/schema";
 import Link from "next/link";
 import { EyeSlash, EyeFill } from "@styled-icons/bootstrap";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
+import Image from "next/image";
 import "react-toastify/dist/ReactToastify.css";
+import Popup from "@/components/toast/popup";
 
 const page = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);  
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const [popup, setPopup] = useState({ show: false, type: "", message: "" });
 
   const handleVisible = () => setIsVisible(!isVisible);
   const handleConfirmVisible = () => setIsConfirmVisible(!isConfirmVisible);
+
   const formik = useFormik({
     initialValues: {
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
       terms: false,
     },
     validationSchema,
     onSubmit: async (values) => {
       setIsSubmitting(true);
-      
+
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        });
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to register. Please try again.");
         }
 
         const result = await response.json();
-        if(result.success=== true){
+        if (result.success === true) {
           router.push("/");
-           toast.success(result.message, {
-                      position: "top-right",
-                    });
+          setPopup({ show: true, type: "success", message: result.message });
         }
-      
       } catch (error) {
-        toast.error(result.message, {
-          position: "top-right",
-        });
-        console.error("Error:", error);
+        setPopup({ show: true, type: "error", message: error.message });
       } finally {
-        setIsSubmitting(false);  
+        setIsSubmitting(false);
       }
     },
   });
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-       <ToastContainer />
-      <div className="w-full max-w-md p-4">
-        <div className="bg-white shadow-md rounded-lg p-4">
-          <h3 className="text-lg font-bold mb-2 border-b pb-2 text-[#428690]">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 slide-in">
+      {popup.show && (
+        <Popup
+          type={popup.type}
+          message={popup.message}
+          onClose={() => setPopup({ show: false, type: "", message: "" })}
+        />
+      )}
+      <div className="flex bg-white shadow-lg rounded-lg max-w-4xl w-full overflow-hidden">
+        {/* Signup Form */}
+        <div className="w-1/2 p-8">
+          <h3 className="text-lg font-bold mb-2 border-b pb-2 text-[#ff7361]">
             Sign Up
           </h3>
           <form onSubmit={formik.handleSubmit} className="space-y-3">
-            {/* Name */}
             <input
               type="text"
               name="username"
-              placeholder="username"
+              placeholder="Username"
               className="w-full border rounded-md p-2 text-sm"
               autoComplete="username"
               value={formik.values.username}
@@ -84,7 +91,6 @@ const page = () => {
               <div className="text-red-500 text-xs">{formik.errors.username}</div>
             )}
 
-            {/* Email */}
             <input
               type="email"
               name="email"
@@ -99,7 +105,6 @@ const page = () => {
               <div className="text-red-500 text-xs">{formik.errors.email}</div>
             )}
 
-            {/* Password */}
             <div className="relative">
               <input
                 type={isVisible ? "text" : "password"}
@@ -126,7 +131,6 @@ const page = () => {
               <div className="text-red-500 text-xs">{formik.errors.password}</div>
             )}
 
-            {/* Confirm Password */}
             <div className="relative">
               <input
                 type={isConfirmVisible ? "text" : "password"}
@@ -150,10 +154,11 @@ const page = () => {
               </div>
             </div>
             {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-              <div className="text-red-500 text-xs">{formik.errors.confirmPassword}</div>
+              <div className="text-red-500 text-xs">
+                {formik.errors.confirmPassword}
+              </div>
             )}
 
-            {/* Terms and Conditions */}
             <div className="flex items-center">
               <input
                 type="checkbox"
@@ -168,23 +173,32 @@ const page = () => {
               <div className="text-red-500 text-xs">{formik.errors.terms}</div>
             )}
 
-            {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-[#1c3a40] hover:bg-[#428690] text-white py-2 rounded-md"
-              disabled={isSubmitting}  // Disable button when submitting
+              className="w-full bg-[#2f3239] hover:bg-[#2f3239] text-white py-2 rounded-md"
+              disabled={isSubmitting}
             >
               {isSubmitting ? "Signing Up..." : "Sign Up"}
             </button>
 
-           
-            {/* Login Link */}
             <div className="flex items-end text-sm justify-end">
-              <Link href="/" className="text-red-500 text-sm underline">
+              <Link href="/auth/login" className="text-red-500 text-sm underline">
                 Log In
               </Link>
             </div>
           </form>
+        </div>
+
+        {/* Image Section */}
+        <div className="w-1/2 bg-[#2f3239] flex items-center justify-center p-8">
+          <Image
+            src="/images/asklogo.jpg" 
+            alt="Ask Me Bro"
+            width={300}
+            height={300}
+            className="rounded-md"
+            priority
+          />
         </div>
       </div>
     </div>

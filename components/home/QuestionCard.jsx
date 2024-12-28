@@ -31,8 +31,8 @@ const QuestionCard = ({ title, description,date }) => {
 
         {/* Buttons */}
         <div className="mt-4 sm:mt-0 sm:ml-4 flex flex-wrap sm:flex-col sm:items-start gap-2">
-          <button className="bg-[#1c3a40] text-white text-xs px-2 py-1 mr-2 mb-md-2 sm:mb-0 sm:mr-0">Question</button>
-          <button className="bg-[#3e8c9c] text-white text-xs px-2 py-1 sm:mb-0">Report</button>
+          <button className="bg-[#ff7361] text-white text-xs px-2 py-1 mr-2 mb-md-2 sm:mb-0 sm:mr-0">Question</button>
+          <button className="bg-[#2f3239] text-white text-xs px-2 py-1 sm:mb-0">Report</button>
         </div>
       </div>
     </div>
