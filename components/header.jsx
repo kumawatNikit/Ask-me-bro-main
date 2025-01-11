@@ -17,7 +17,6 @@ const Header = () => {
   const {isAuthenticated, user} = useSelector((state) => state.auth);
   const [popup, setPopup] = useState({ show: false, type: "", message: "" });
 
-console.log(isAuthenticated, user, "user")
    const handleLogout = async () => {
       try {
         if (!user) {
