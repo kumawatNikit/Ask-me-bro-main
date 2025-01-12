@@ -1,6 +1,7 @@
+import { formatDate } from '@/lib/formatDate';
 import React from 'react';
 
-const QuestionCard = ({ title, description,date }) => {
+const QuestionCard = ({ title, description,date,status,views,answers,favorites }) => {
   return (
     <div className="bg-white text-black shadow-md rounded-lg p-4 mb-4 border border-gray-300">
       <div className="flex flex-col sm:flex-row items-start">
@@ -20,12 +21,12 @@ const QuestionCard = ({ title, description,date }) => {
 
           {/* Question details */}
           <div className="flex flex-wrap items-center text-gray-500 text-xs">
-            <span className="text-green-600 font-medium mr-2 mb-2 sm:mb-0">✔ solved</span>
-            <span className="mr-4 mb-2 sm:mb-0">⭐ 5</span>
+            <span className="text-green-600 font-medium mr-2 mb-2 sm:mb-0">{status ? status : "pending"}</span>
+            <span className="mr-4 mb-2 sm:mb-0">⭐ {favorites}</span>
             <span className="mr-4 mb-2 sm:mb-0">📂 wordpress</span>
-            <span className="mr-4 mb-2 sm:mb-0">⏱ 4 mins ago</span>
-            <span className="mr-4 mb-2 sm:mb-0">💬 5 Answers</span>
-            <span className="mb-2 sm:mb-0">👀 70 views</span>
+            <span className="mr-4 mb-2 sm:mb-0">⏱ {formatDate(date)}</span>
+            <span className="mr-4 mb-2 sm:mb-0">💬 {answers}</span>
+            <span className="mb-2 sm:mb-0">👀 {views}</span>
           </div>
         </div>
 

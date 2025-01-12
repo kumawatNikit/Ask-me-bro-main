@@ -1,88 +1,12 @@
 import React, { useState } from "react";
 import QuestionCard from "../QuestionCard";
+import useFetch from "@/lib/useQuestion";
 
 const RecentlyAnswered = () => {
-  const recentlyAnsweredQuestions = [
-    {
-      title: "What is the difference between let and const in JavaScript?",
-      date: "May 5, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "How can I implement pagination in a React application?",
-      date: "Jun 1, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "How can I implement pagination in a React application?",
-      date: "Jun 1, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "How can I implement pagination in a React application?",
-      date: "Jun 1, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "How can I implement pagination in a React application?",
-      date: "Jun 1, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "How can I implement pagination in a React application?",
-      date: "Jun 1, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "How can I implement pagination in a React application?",
-      date: "Jun 1, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "How can I implement pagination in a React application?",
-      date: "Jun 1, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "How can I implement pagination in a React application?",
-      date: "Jun 1, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "How can I implement pagination in a React application?",
-      date: "Jun 1, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "How can I implement pagination in a React application?",
-      date: "Jun 1, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "How can I implement pagination in a React application?",
-      date: "Jun 1, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "How can I implement pagination in a React application?",
-      date: "Jun 1, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-  ];
 
+  const { data: recentlyAnsweredQuestions, error, loading } = useFetch(
+    "/home/public/top-questions"
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const questionsPerPage = 8;
 
@@ -102,15 +26,26 @@ const RecentlyAnswered = () => {
   // Pagination handler
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p style={{ color: "red" }}>Error: {error}</p>;
+  }
   return (
     <div>
       {/* Display current questions */}
       {currentQuestions.map((question, index) => (
         <QuestionCard
-          key={index}
-          title={question.title}
-          date={question.date}
-          description={question.description}
+        key={index}
+        title={question.title}
+        date={question.createdAt}
+        description={question.description}
+        status={question.status}
+        views={question.views}
+        answers={question.answers.length}
+        favorites={question.favorites}
         />
       ))}
 

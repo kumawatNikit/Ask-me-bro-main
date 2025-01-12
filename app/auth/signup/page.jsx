@@ -5,9 +5,7 @@ import { validationSchema } from "@/schema/schema";
 import Link from "next/link";
 import { EyeSlash, EyeFill } from "@styled-icons/bootstrap";
 import { useRouter } from "next/navigation";
-import { ToastContainer, toast } from "react-toastify";
 import Image from "next/image";
-import "react-toastify/dist/ReactToastify.css";
 import Popup from "@/components/toast/popup";
 
 const page = () => {
@@ -62,7 +60,7 @@ const page = () => {
   });
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 slide-in">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
       {popup.show && (
         <Popup
           type={popup.type}
@@ -70,9 +68,9 @@ const page = () => {
           onClose={() => setPopup({ show: false, type: "", message: "" })}
         />
       )}
-      <div className="flex bg-white shadow-lg rounded-lg max-w-4xl w-full overflow-hidden">
+      <div className="flex flex-col sm:flex-row bg-white shadow-lg rounded-lg w-full max-w-md sm:max-w-4xl overflow-hidden">
         {/* Signup Form */}
-        <div className="w-1/2 p-8">
+        <div className="w-full sm:w-1/2 p-8">
           <h3 className="text-lg font-bold mb-2 border-b pb-2 text-[#ff7361]">
             Sign Up
           </h3>
@@ -81,7 +79,7 @@ const page = () => {
               type="text"
               name="username"
               placeholder="Username"
-              className="w-full border rounded-md p-2 text-sm"
+              className="w-full border rounded-md p-2 text-sm bg-gray-50"
               autoComplete="username"
               value={formik.values.username}
               onChange={formik.handleChange}
@@ -95,7 +93,7 @@ const page = () => {
               type="email"
               name="email"
               placeholder="Email"
-              className="w-full border rounded-md p-2 text-sm"
+              className="w-full border rounded-md p-2 text-sm bg-gray-50"
               autoComplete="email"
               value={formik.values.email}
               onChange={formik.handleChange}
@@ -110,7 +108,7 @@ const page = () => {
                 type={isVisible ? "text" : "password"}
                 name="password"
                 placeholder="Password"
-                className="w-full border rounded-md p-2 text-sm"
+                className="w-full border rounded-md p-2 text-sm bg-gray-50"
                 autoComplete="new-password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
@@ -136,7 +134,7 @@ const page = () => {
                 type={isConfirmVisible ? "text" : "password"}
                 name="confirmPassword"
                 placeholder="Confirm Password"
-                className="w-full border rounded-md p-2 text-sm"
+                className="w-full border rounded-md p-2 text-sm bg-gray-50"
                 autoComplete="new-password"
                 value={formik.values.confirmPassword}
                 onChange={formik.handleChange}
@@ -181,7 +179,7 @@ const page = () => {
               {isSubmitting ? "Signing Up..." : "Sign Up"}
             </button>
 
-            <div className="flex items-end text-sm justify-end">
+            <div className="flex items-center justify-end text-sm">
               <Link href="/auth/login" className="text-red-500 text-sm underline">
                 Log In
               </Link>
@@ -190,9 +188,11 @@ const page = () => {
         </div>
 
         {/* Image Section */}
-        <div className="w-1/2 bg-[#2f3239] flex items-center justify-center p-8">
+        <div
+          className="hidden sm:flex w-full sm:w-1/2 bg-[#2f3239] flex items-center justify-center text-white text-2xl font-bold p-8"
+        >
           <Image
-            src="/images/asklogo.jpg" 
+            src="/images/asklogo.jpg"
             alt="Ask Me Bro"
             width={300}
             height={300}

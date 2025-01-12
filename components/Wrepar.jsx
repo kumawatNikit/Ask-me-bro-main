@@ -49,7 +49,7 @@ const Wrepar = ({ children }) => {
 
             {/* Layouts */}
             {layout === "default" && (
-              <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 p-4 lg:p-20">
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 p-4 lg:p-20">
                 <div
                   className={`${
                     hideRightSideLayout ? "col-span-12" : "col-span-1 md:col-span-3"

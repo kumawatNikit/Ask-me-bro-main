@@ -1,96 +1,14 @@
 import React, { useState } from "react";
 import QuestionCard from "../QuestionCard";
+import useFetch from "@/lib/useQuestion";
 
 const MostResponses = () => {
-  const questionsWithMostResponses = [
-    {
-      title: "How do I use React hooks?",
-      date: "Mar 15, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "What is the best way to optimize website performance?",
-      date: "Apr 20, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "What is the best way to optimize website performance?",
-      date: "Apr 20, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "What is the best way to optimize website performance?",
-      date: "Apr 20, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "What is the best way to optimize website performance?",
-      date: "Apr 20, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "What is the best way to optimize website performance?",
-      date: "Apr 20, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "What is the best way to optimize website performance?",
-      date: "Apr 20, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "What is the best way to optimize website performance?",
-      date: "Apr 20, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "What is the best way to optimize website performance?",
-      date: "Apr 20, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "What is the best way to optimize website performance?",
-      date: "Apr 20, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "What is the best way to optimize website performance?",
-      date: "Apr 20, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "What is the best way to optimize website performance?",
-      date: "Apr 20, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "What is the best way to optimize website performance?",
-      date: "Apr 20, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "What is the best way to optimize website performance?",
-      date: "Apr 20, 2023",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-  ];
+  const { data: questionsWithMostResponses, error, loading } = useFetch(
+    "/home/public/featured-questions"
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const questionsPerPage = 8;
-
+console.log(questionsWithMostResponses, "questionsWithMostResponses")
   // Calculate indices for slicing
   const indexOfLastQuestion = currentPage * questionsPerPage;
   const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
@@ -107,15 +25,28 @@ const MostResponses = () => {
   // Pagination handler
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p style={{ color: "red" }}>Error: {error}</p>;
+  }
+
   return (
     <div>
       {/* Display current questions */}
       {currentQuestions.map((question, index) => (
         <QuestionCard
-          key={index}
-          title={question.title}
-          date={question.date}
-          description={question.description}
+        key={index}
+        title={question.title}
+        date={question.createdAt}
+        description={question.description}
+        status={question.status}
+        views={question.views}
+        answers={question.answers.length}
+        favorites={question.favorites}
         />
       ))}
 

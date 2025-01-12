@@ -24,3 +24,13 @@ password: Yup.string()
   .min(6, 'Password must be at least 6 characters'),
 
 });
+
+export const validationUpdateSchema = Yup.object({
+  username: Yup.string().required('Name is required'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(6, 'Password must be at least 6 characters'),
+  confirmPassword: Yup.string()
+    .required('Confirm Password is required')
+    .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+});

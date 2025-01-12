@@ -1,135 +1,16 @@
 import React, { useState } from "react";
 import QuestionCard from "../QuestionCard";
+import useFetch from "@/lib/useQuestion";
 
 const RecentQuestions = () => {
-  const recentQuestions = [
-    {
-      title: "This is my First Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-
-    {
-      title: "This Is My Second Poll Question",
-      date: "Feb 22, 2014",
-      description:
-        "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Curabitur vitae velit in neque dictum blandit.",
-    },
-
-    // ...more questions
-  ];
+  const { data: recentQuestions, error, loading } = useFetch(
+    "/home/public/top-questions"
+  );
 
   const [currentPage, setCurrentPage] = useState(1);
   const questionsPerPage = 8;
 
-  // Calculate indices
+  // Pagination Calculations
   const indexOfLastQuestion = currentPage * questionsPerPage;
   const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
   const currentQuestions = recentQuestions.slice(
@@ -137,9 +18,16 @@ const RecentQuestions = () => {
     indexOfLastQuestion
   );
 
-  // Change page
   const totalPages = Math.ceil(recentQuestions.length / questionsPerPage);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p style={{ color: "red" }}>Error: {error}</p>;
+  }
 
   return (
     <div>
@@ -147,8 +35,12 @@ const RecentQuestions = () => {
         <QuestionCard
           key={index}
           title={question.title}
-          date={question.date}
+          date={question.createdAt}
           description={question.description}
+          status={question.status}
+          views={question.views}
+          answers={question.answers.length}
+          favorites={question.favorites}
         />
       ))}
 
